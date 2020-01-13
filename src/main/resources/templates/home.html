@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Home Page</title></head>
+<body>
+<h1>Hello !</h1>
+<p>Welcome to <span th:text="${appName}">User review application</span></p>
+<div>
+    <form action="#" th:action="@{/createUser}" th:object="${user}" method="post">
+        <div>
+            <div>
+                <label for="name">First Name</label>
+                <input type="text" th:field="*{name}" id="name" placeholder="User Name"/>
+            </div>
+            <div>
+                <input type="submit" value=" Submit ">
+            </div>
+            <input type="hidden" id="id" th:field="*{id}">
+        </div>
+    </form>
+</div>
+<div th:switch="${users}">
+    <div>
+        <h2 th:case="null">No record found !!</h2>
+        <div th:case="*">
+            <table>
+                <thead>
+                <tr>
+                    <th>Name of User</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.name}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
