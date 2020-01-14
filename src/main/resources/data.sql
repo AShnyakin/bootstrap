@@ -1,5 +1,5 @@
 INSERT INTO 
-	TBL_USERS (name)
+	TBL_MESSAGES (user_name, description)
 VALUES
-  	('Valeriy'),
-  	('Konstantin');
+  	('Valeriy', 'Nice music fine'),
+  	('Konstantin', 'Like a bus');
