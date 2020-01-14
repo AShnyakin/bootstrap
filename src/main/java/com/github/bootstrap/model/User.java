@@ -4,18 +4,31 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name="TBL_USERS")
+@Table(name = "TBL_USERS")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @NotBlank(message = "Name is mandatory")
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    public User() {}
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Review review;
+
+    public User() {
+    }
+
+    public Review getReview() {
+        return review;
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
+    }
 
     public Long getId() {
         return id;

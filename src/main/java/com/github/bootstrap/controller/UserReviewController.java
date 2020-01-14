@@ -1,11 +1,10 @@
 package com.github.bootstrap.controller;
 
 import com.github.bootstrap.model.User;
-import com.github.bootstrap.service.UserService;
+import com.github.bootstrap.service.UserReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,11 +15,11 @@ import java.util.List;
 public class UserReviewController {
 
     @Autowired
-    UserService userService;
+    UserReviewService userReviewService;
 
     @RequestMapping
     public String getAllUserReviews(Model model) {
-        List<User> list = userService.getAllUsers();
+        List<User> list = userReviewService.getAllUsers();
         model.addAttribute("user", new User());
         model.addAttribute("users", list);
         return "home";
@@ -28,7 +27,7 @@ public class UserReviewController {
 
     @RequestMapping(path = "/createUser", method = RequestMethod.POST)
     public String createOrUpdateUser(User user) {
-        userService.createUpdateUser(user);
+        userReviewService.createUpdateUser(user);
         return "redirect:/";
     }
 

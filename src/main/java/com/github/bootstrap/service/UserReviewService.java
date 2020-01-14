@@ -1,7 +1,9 @@
 package com.github.bootstrap.service;
 
 import com.github.bootstrap.exception.UserNotFoundException;
+import com.github.bootstrap.model.Review;
 import com.github.bootstrap.model.User;
+import com.github.bootstrap.repository.ReviewRepository;
 import com.github.bootstrap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,13 +13,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserReviewService {
 
     @Autowired
-    UserRepository repository;
+    UserRepository userRepository;
+    @Autowired
+    ReviewRepository reviewRepository;
 
     public List<User> getAllUsers() {
-        List<User> result = (List<User>) repository.findAll();
+        List<User> result = (List<User>) userRepository.findAll();
 
         if (result.size() > 0) {
             return result;
@@ -26,32 +30,22 @@ public class UserService {
         }
     }
 
-    public User getUserById(Long id) throws UserNotFoundException {
-        Optional<User> user = repository.findById(id);
-
-        if (user.isPresent()) {
-            return user.get();
-        } else {
-            throw new UserNotFoundException("No user record exist for given id");
-        }
-    }
-
     public User createUpdateUser(User user) {
         if (user.getId() == null) {
-            user = repository.save(user);
+            user = userRepository.save(user);
 
             return user;
         } else {
-            Optional<User> entity = repository.findById(user.getId());
+            Optional<User> entity = userRepository.findById(user.getId());
 
             if (entity.isPresent()) {
                 User newUser = entity.get();
                 newUser.setName(user.getName());
-                newUser = repository.save(newUser);
+                newUser = userRepository.save(newUser);
 
                 return newUser;
             } else {
-                user = repository.save(user);
+                user = userRepository.save(user);
 
                 return user;
             }

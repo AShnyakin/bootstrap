@@ -2,13 +2,14 @@
 <head><title>Home Page</title></head>
 <body>
 <h1>Hello !</h1>
-<p>Welcome to <span th:text="${appName}">User review application</span></p>
+<p>Welcome to User review application</span></p>
 <div>
     <form action="#" th:action="@{/createUser}" th:object="${user}" method="post">
         <div>
             <div>
                 <label for="name">First Name</label>
                 <input type="text" th:field="*{name}" id="name" placeholder="User Name"/>
+                <input type="text" th:field="*{review.comment}" id="review" placeholder="Review"/>
             </div>
             <div>
                 <input type="submit" value=" Submit ">
@@ -26,10 +27,16 @@
                 <tr>
                     <th>Name of User</th>
                 </tr>
+                <tr>
+                    <th>User comment</th>
+                </tr>
                 </thead>
                 <tbody>
                 <tr th:each="user : ${users}">
                     <td th:text="${user.name}"></td>
+                </tr>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.review.comment}"></td>
                 </tr>
                 </tbody>
             </table>
