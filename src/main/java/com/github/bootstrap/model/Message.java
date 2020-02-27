@@ -19,6 +19,7 @@ public class Message {
 
     @NotBlank(message = "Name is mandatory")
     @Column(name = "description")
+    @Basic(fetch = FetchType.LAZY)
     private String description;
 
     public Long getId() {

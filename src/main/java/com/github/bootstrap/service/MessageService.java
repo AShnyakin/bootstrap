@@ -37,8 +37,8 @@ public class MessageService {
         }
     }
 
-    public Message createUpdateMessage(Message message) {
-        if (message.getDescription().isEmpty() || message.getDescription().isEmpty()) {
+    public Message createOrUpdateMessage(Message message) {
+        if (message.getDescription().isEmpty()) {
             throw new ValidationMessage("Message user name and description are mandatory");
         }
         if (message.getId() == null) {

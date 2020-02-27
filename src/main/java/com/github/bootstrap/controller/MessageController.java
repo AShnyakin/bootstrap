@@ -27,7 +27,7 @@ public class MessageController {
 
     @RequestMapping(path = "/createMessage", method = RequestMethod.POST)
     public String createOrUpdateMessage(Message message) {
-        messageService.createUpdateMessage(message);
+        messageService.createOrUpdateMessage(message);
         return "redirect:/";
     }
 
